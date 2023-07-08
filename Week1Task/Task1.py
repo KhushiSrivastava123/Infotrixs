@@ -52,19 +52,33 @@ def update_contact():
     if not found:
         print("Contact not found.")
 
+def delete_contact():
+    query = input("Enter the name to delete: ")
+    found = False
+    for contact in contacts:
+        if query.lower() == contact['name'].lower():
+            contacts.remove(contact)
+            save_contacts(contacts)
+            print("Contact deleted successfully!")
+            found = True
+            break
+    if not found:
+        print("Contact not found.")
+
 def print_menu():
     print("Contact Management System")
     print("-------------------------")
     print("1. Add a contact")
     print("2. Search for a contact")
     print("3. Update a contact")
-    print("4. Exit")
+    print("4. Delete a contact")
+    print("5. Exit")
 
 contacts = load_contacts()
 
 while True:
     print_menu()
-    choice = input("Enter your choice (1-4): ")
+    choice = input("Enter your choice (1-5): ")
     if choice == '1':
         add_contact()
     elif choice == '2':
@@ -72,6 +86,8 @@ while True:
     elif choice == '3':
         update_contact()
     elif choice == '4':
+        delete_contact()
+    elif choice == '5':
         print("Goodbye!")
         break
     else:
